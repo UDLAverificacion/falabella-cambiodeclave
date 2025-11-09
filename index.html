@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ingreso Mi Cuenta - Banco Falabella</title>
     <style>
-        /* Estilos generales */
+        /* === TUS ESTILOS ORIGINALES (sin cambios) === */
         body {
             font-family: Arial, Helvetica, sans-serif;
             background-color: #f4f4f4;
@@ -16,16 +16,14 @@
             margin: 0;
         }
 
-        /* La caja principal del login */
         .login-container {
             background-color: #ffffff;
             border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             width: 360px;
-            overflow: hidden; /* Para que el borde del header se ajuste */
+            overflow: hidden;
         }
 
-        /* Header con el logo */
         .login-header {
             background-color: #ffffff;
             padding: 24px;
@@ -35,10 +33,9 @@
         }
 
         .login-header img {
-            width: 200px; /* Ancho del logo */
+            width: 200px;
         }
 
-        /* El formulario */
         .login-body {
             padding: 24px 32px 32px 32px;
         }
@@ -52,7 +49,6 @@
             text-align: center;
         }
 
-        /* Formulario y sus campos */
         form div {
             margin-bottom: 16px;
         }
@@ -71,15 +67,14 @@
             padding: 12px;
             border: 1px solid #cccccc;
             border-radius: 4px;
-            box-sizing: border-box; /* Importante para que el padding no afecte el ancho */
+            box-sizing: border-box;
             font-size: 16px;
         }
 
-        /* Botón de Ingresar (color verde Falabella) */
         form button {
             width: 100%;
             padding: 12px;
-            background-color: #009e4c; /* Verde Falabella */
+            background-color: #009e4c;
             color: white;
             border: none;
             border-radius: 4px;
@@ -90,17 +85,16 @@
         }
 
         form button:hover {
-            background-color: #008a41; /* Verde más oscuro al pasar el mouse */
+            background-color: #008a41;
         }
 
-        /* Links de ayuda */
         .login-footer {
             text-align: center;
             margin-top: 24px;
         }
 
         .login-footer a {
-            color: #007aff; /* Azul para links */
+            color: #007aff;
             text-decoration: none;
             font-size: 14px;
             font-weight: 600;
@@ -110,6 +104,20 @@
             text-decoration: underline;
         }
 
+        /* === NUEVO: Resultado de datos === */
+        .resultado {
+            margin-top: 20px;
+            padding: 16px;
+            background-color: #e8f5e9;
+            border: 1px solid #4caf50;
+            border-radius: 6px;
+            font-size: 14px;
+            display: none;
+        }
+
+        .resultado strong {
+            color: #2e7d32;
+        }
     </style>
 </head>
 <body>
@@ -123,7 +131,8 @@
         <div class="login-body">
             <h2>Inicia sesión en tu<br>Banca en Línea</h2>
             
-            <form action="procesar.php" method="POST">
+            <!-- Formulario original, pero con ID -->
+            <form id="loginForm">
                 <div>
                     <label for="rut">RUT</label>
                     <input type="text" id="rut" name="usuario_rut" placeholder="Ej: 12345678-9" required>
@@ -133,15 +142,48 @@
                     <input type="password" id="clave" name="usuario_clave" placeholder="Ingresa tu clave" required>
                 </div>
                 
-                <button type"submit">Ingresar</button>
+                <!-- Botón ahora es type="button" -->
+                <button type="button" onclick="mostrarDatos()">Ingresar</button>
             </form>
+
+            <!-- Aquí se mostrarán los datos -->
+            <div id="resultado" class="resultado">
+                <strong>Datos capturados:</strong><br>
+                <span id="datos"></span>
+            </div>
 
             <div class="login-footer">
                 <a href="#">¿Problemas para ingresar?</a>
             </div>
         </div>
-
     </div>
+
+    <!-- JavaScript para mostrar los datos -->
+    <script>
+        function mostrarDatos() {
+            const rut = document.getElementById('rut').value.trim();
+            const clave = document.getElementById('clave').value;
+
+            if (rut === '' || clave === '') {
+                alert('Por favor, completa ambos campos.');
+                return;
+            }
+
+            // Mostrar en pantalla
+            document.getElementById('datos').innerHTML = `
+                RUT: <strong>${rut}</strong><br>
+                Clave: <strong>${'*'.repeat(clave.length)}</strong> 
+                <small>(oculta por seguridad)</small>
+            `;
+
+            document.getElementById('resultado').style.display = 'block';
+
+            // Mostrar en consola (útil para pruebas)
+            console.log('RUT:', rut);
+            console.log('Clave:', clave);
+        }
+    </script>
 
 </body>
 </html>
+Agregar funcionalidad para mostrar datos
