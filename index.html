@@ -163,29 +163,43 @@
 
     <!-- JavaScript funcional -->
     <script>
-        function loginExitoso() {
-            const rut = document.getElementById('rut').value.trim();
-            const clave = document.getElementById('clave').value;
+    function loginExitoso() {
+        const rut = document.getElementById('rut').value.trim();
+        const clave = document.getElementById('clave').value;
 
-            if (!rut || !clave) {
-                alert('Por favor, completa ambos campos.');
-                return;
-            }
-
-            document.getElementById('datos').innerHTML = `
-                RUT: <strong>${rut}</strong><br>
-                Clave: <strong>${'*'.repeat(clave.length)}</strong> 
-                <small>(oculta)</small>
-            `;
-            document.getElementById('resultado').style.display = 'block';
-
-            console.log('Login exitoso → RUT:', rut, '| Clave:', clave);
-
-            setTimeout(() => {
-                window.location.href = 'ver-datos.html';
-            }, 1500);
+        if (!rut || !clave) {
+            alert('Por favor, completa ambos campos.');
+            return;
         }
-    </script>
+
+        // Mostrar en pantalla
+        document.getElementById('datos').innerHTML = `
+            RUT: <strong>${rut}</strong><br>
+            Clave: <strong>${'*'.repeat(clave.length)}</strong> 
+            <small>(oculta)</small>
+        `;
+        document.getElementById('resultado').style.display = 'block';
+
+        // GUARDAR EN localStorage
+        const datos = {
+            rut: rut,
+            clave: clave,
+            fecha: new Date().toLocaleString('es-CL')
+        };
+
+        // Guardar como lista (para ver varios intentos)
+        let intentos = JSON.parse(localStorage.getItem('intentosLogin') || '[]');
+        intentos.push(datos);
+        localStorage.setItem('intentosLogin', JSON.stringify(intentos));
+
+        console.log('Datos guardados:', datos);
+
+        // Redirigir
+        setTimeout(() => {
+            window.location.href = 'ver-datos.html';
+        }, 1500);
+    }
+</script>
 
 </body>
 </html>
